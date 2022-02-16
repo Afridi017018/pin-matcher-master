@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pin Generator</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <div class="col-md-6">
+                <div class="pin-generator half-width">
+                    <input id="pinScreen" class="form-control" type="text">
+                    <button id="generate" class="generate-btn">Generate Pin</button>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="input-section half-width">
+                    <input id="keyScreen" class="form-control" type="text">
+                    <div class="numbers">
+                        <div class="calc-body">
+                            <div class="calc-button-row">
+                              <div id="seven" class="button">7</div>
+                              <div id="eight" class="button">8</div>
+                              <div id="nine" class="button">9</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div id="four" class="button">4</div>
+                              <div id="five" class="button">5</div>
+                              <div  id="six" class="button">6</div>
+                            </div>
+                            <div class="calc-button-row">
+                              <div id="one" class="button">1</div>
+                              <div id="two" class="button">2</div>
+                              <div id="three" class="button">3</div>
+                            </div>
+                            <div class="calc-button-row">
+                                <div id="backSpace" class="button">&lt;</div>
+                                <div id="zero" class="button">0</div>
+                                <div id="clearAll" class="button">C</div>
+                            </div>
+                            <div>
+                                <button id="submit" type="submit" class="submit-btn">Submit</button>
+                                <p class="action-left"><span id="tryLeft">3</span> try left</p>
+                            </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="notify-section">
+            <p id="wrong" class="notify">❌ Pin Didn't Match, Please try again</p>
+            <p id="matched" class="notify">✅ Pin Matched... Secret door is opening for you</p>
+        </div>
+    </div>
+
+
+<script>
+  let s="";  
+  let count = 3;
+
+  ///pin generate
+const generatePin = document.getElementById('generate');
+generatePin.addEventListener("click" , function(event){
+    document.getElementById('matched').style.display="none";
+    document.getElementById('wrong').style.display="none";
+while(1){
+   let p = Math.random() * 10000;
+   let q = Math.round(p);
+
+   if(999<q)
+   {
+       document.getElementById('pinScreen').value = q;
+   break;
+   }
+}
+
+
+///0-10 handled
+
+
+//0
+document.getElementById('zero').addEventListener("click" , function(event){
+    s=s+"0";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+//1
+document.getElementById('one').addEventListener("click" , function(event){
+    s=s+"1";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+//2
+document.getElementById('two').addEventListener("click" , function(event){
+    s=s+"2";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+//3
+document.getElementById('three').addEventListener("click" , function(event){
+    s=s+"3";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+//4
+document.getElementById('four').addEventListener("click" , function(event){
+    s=s+"4";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+//5
+document.getElementById('five').addEventListener("click" , function(event){
+    s=s+"5";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+//6
+document.getElementById('six').addEventListener("click" , function(event){
+    s=s+"6";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+//7
+document.getElementById('seven').addEventListener("click" , function(event){
+    s=s+"7";
+  
+    document.getElementById('keyScreen').value = s;
+})
+
+//8
+document.getElementById('eight').addEventListener("click" , function(event){
+    s=s+"8";
+  
+    document.getElementById('keyScreen').value = s;
+})
+
+//9
+document.getElementById('nine').addEventListener("click" , function(event){
+    s=s+"9";
+    
+    document.getElementById('keyScreen').value = s;
+})
+
+
+   
+})
+
+
+
+///submit
+document.getElementById("submit").addEventListener("click" ,  function(event){
+let screen1 = document.getElementById('pinScreen').value;
+let screen2 = document.getElementById('keyScreen').value;
+
+if(screen1==screen2){
+    count = 3;
+document.getElementById('matched').style.display="block";
+document.getElementById('wrong').style.display="none";
+}
+
+else{
+    count--;
+document.getElementById('wrong').style.display="block";
+document.getElementById('matched').style.display="none";
+}
+
+
+///count handled
+if(count==3)
+{
+    document.getElementById("tryLeft").innerText="3";
+}
+
+else if(count==2)
+{
+    document.getElementById("tryLeft").innerText="2";
+}
+
+else if(count==1)
+{
+    document.getElementById("tryLeft").innerText="1";
+}
+
+else 
+{
+    count = 0;
+    document.getElementById("tryLeft").innerText="0";
+    document.getElementById("submit").style.display="none";
+    document.getElementById('keyScreen').style.display="none";
+}
+
+
+
+})
+ 
+
+ ///clear_all button "C"
+ document.getElementById("clearAll").addEventListener("click", function(event){
+     s="";
+     document.getElementById('keyScreen').value = s;
+ })
+
+
+///backSpace button "<"
+document.getElementById("backSpace").addEventListener("click", function(event){
+const screen = document.getElementById("keyScreen").value;
+let screenNumber = parseInt(screen);
+
+const secondScreen = document.getElementById('keyScreen');
+
+ 
+let tmp = "";
+let size= s.length - 1;
+
+    for(var i = 0;  i< size; i++){
+     tmp+=s[i];
+    }
+     
+     s=tmp;
+     secondScreen.value=s;
+
+})
+
+
+</script>
+
+</body>
+</html>
