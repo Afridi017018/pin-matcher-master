@@ -57,7 +57,7 @@
 
 
 <script>
-  let s="";  
+  let s= document.getElementById('keyScreen').value; 
   let count = 3;
 
   ///pin generate
@@ -65,6 +65,8 @@ const generatePin = document.getElementById('generate');
 generatePin.addEventListener("click" , function(event){
     document.getElementById('matched').style.display="none";
     document.getElementById('wrong').style.display="none";
+
+
 while(1){
    let p = Math.random() * 10000;
    let q = Math.round(p);
@@ -75,6 +77,7 @@ while(1){
    break;
    }
 }
+})
 
 
 ///0-10 handled
@@ -83,7 +86,7 @@ while(1){
 //0
 document.getElementById('zero').addEventListener("click" , function(event){
     s=s+"0";
-    
+    console.log("0");
     document.getElementById('keyScreen').value = s;
 })
 
@@ -152,7 +155,7 @@ document.getElementById('nine').addEventListener("click" , function(event){
 
 
    
-})
+
 
 
 
